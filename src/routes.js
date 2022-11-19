@@ -5,6 +5,8 @@ const login = require("./controllers/login");
 const authorization = require("./middleware/authorization");
 const { registerUser, detailUser } = require("./controllers/users");
 const { registerCar, ListCars, detailCar } = require("./controllers/cars");
+const { registerSale, ListSales, detailSale } = require("./controllers/sales");
+
 const {
   registerSeller,
   ListSellers,
@@ -26,5 +28,9 @@ route.get("/cars/:id", detailCar);
 route.post("/sellers", registerSeller);
 route.get("/sellers", ListSellers);
 route.get("/sellers/:id", detailSeller);
+
+route.post("/sales", registerSale);
+route.get("/sales", ListSales);
+route.get("/sales/:id", detailSale);
 
 module.exports = route;
