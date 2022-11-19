@@ -41,7 +41,25 @@ const ListSales = async (req, res) => {
   }
 };
 
-const detailSale = async (req, res) => {};
+const detailSale = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const sale = await knex("vendas")
+      .leftJoin("carros", "vendas.carro_id", "=", "carros.id")
+      .leftJoin("vendedores", "vendas.vendedor_id", "=", "vendedores.id")
+      .select("vendas.id", "modelo", "marca", "valor", "nome", "data")
+      .where("vendas.id", id)
+      .first();
+    if (!sale) {
+      return res.status(400).json("Não foi possivel detalhar a venda.");
+    }
+
+    return res.status(200).json(sale);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
 
 module.exports = {
   registerSale,
