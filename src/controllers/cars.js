@@ -41,12 +41,12 @@ const detailCar = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const allCars = await knex("carros").where("id", id).first();
-    if (!allCars) {
-      return res.status(400).json("Não foi possivel listar os carros.");
+    const car = await knex("carros").where("id", id).first();
+    if (!car) {
+      return res.status(400).json("Não foi possivel detalhar o carro.");
     }
 
-    return res.status(200).json(allCars);
+    return res.status(200).json(car);
   } catch (error) {
     return res.status(500).json(error.message);
   }

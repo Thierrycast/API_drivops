@@ -37,7 +37,20 @@ const ListSellers = async (req, res) => {
   }
 };
 
-const detailSeller = async (req, res) => {};
+const detailSeller = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const seller = await knex("vendedores").where("id", id).first();
+    if (!seller) {
+      return res.status(400).json("Não foi possivel detalhar o vendedor.");
+    }
+
+    return res.status(200).json(seller);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
 
 module.exports = {
   registerSeller,
