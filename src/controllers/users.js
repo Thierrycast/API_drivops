@@ -40,10 +40,17 @@ const detailUser = async (req, res) => {
   const { id } = req.usuario;
 
   try {
-    const user = await knex("usuarios").where("id", id);
+    const user = await knex("usuarios")
+      .select("id", "nome", "email")
+      .where("id", id)
+      .first();
     if (user.length === 0) {
       return res.status(404).json("o usuário não foi encontrado");
     }
+
+    user;
+
+    return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json(error.message);
   }
