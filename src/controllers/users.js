@@ -1,10 +1,13 @@
 const knex = require("../database/connection");
 const bcrypt = require("bcrypt");
+const { schemaRegisterUser } = require("../validation/schemaUsers");
 
 const registerUser = async (req, res) => {
   const { nome, email, senha } = req.body;
 
   try {
+    await schemaRegisterUser.validate(req.body);
+
     const searchEmail = await knex("usuarios")
       .select("email")
       .where("email", email);
