@@ -4,7 +4,12 @@ const route = express();
 const login = require("./controllers/login");
 const authorization = require("./middleware/authorization");
 const { registerUser, detailUser } = require("./controllers/users");
-const { registerCar } = require("./controllers/cars");
+const { registerCar, ListCars, detailCar } = require("./controllers/cars");
+const {
+  registerSeller,
+  ListSellers,
+  detailSeller,
+} = require("./controllers/sellers");
 
 route.post("/users", registerUser);
 
@@ -15,5 +20,11 @@ route.use(authorization);
 route.get("/user", detailUser);
 
 route.post("/cars", registerCar);
+route.get("/cars", ListCars);
+route.get("/cars/:id", detailCar);
+
+route.post("/sellers", registerSeller);
+route.get("/sellers", ListSellers);
+route.get("/sellers/:id", detailSeller);
 
 module.exports = route;
