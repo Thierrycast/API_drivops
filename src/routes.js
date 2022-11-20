@@ -6,6 +6,11 @@ const authorization = require("./middleware/authorization");
 const { registerUser, detailUser } = require("./controllers/users");
 const { registerCar, ListCars, detailCar } = require("./controllers/cars");
 const { registerSale, ListSales, detailSale } = require("./controllers/sales");
+const {
+  rankSellers,
+  salesPerMonth,
+  averageCarValues,
+} = require("./controllers/dashboard");
 
 const {
   registerSeller,
@@ -32,5 +37,9 @@ route.get("/sellers/:id", detailSeller);
 route.post("/sales", registerSale);
 route.get("/sales", ListSales);
 route.get("/sales/:id", detailSale);
+
+route.get("/dashboard/ranksellers", rankSellers);
+route.get("/dashboard/salespermonth", salesPerMonth);
+route.get("/dashboard/averagecarvalues", averageCarValues);
 
 module.exports = route;
