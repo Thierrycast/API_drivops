@@ -18,6 +18,8 @@ const registerSale = async (req, res) => {
       return res.status(400).json("A venda não foi cadastrada.");
     }
 
+    const carUpdate = await knex("carros").update({ disponivel: false });
+
     return res.status(200).json("A venda foi cadastrado com sucesso.");
   } catch (error) {
     return res.status(500).json(error.message);
