@@ -26,7 +26,7 @@ const registerCar = async (req, res) => {
 
 const ListCars = async (req, res) => {
   try {
-    const allCars = await knex("carros");
+    const allCars = await knex("carros").where("disponivel", "=", true);
     if (!allCars) {
       return res.status(400).json("Não foi possivel listar os carros.");
     }
